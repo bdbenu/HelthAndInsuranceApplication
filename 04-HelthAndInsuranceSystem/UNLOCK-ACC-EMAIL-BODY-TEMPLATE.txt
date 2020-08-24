@@ -1,0 +1,14 @@
+Hi {FNAME}, {LNAME}
+<br/>
+Welcome to Health and Insurance System pvt. Ltd , Your Registration is almost completed. Please use below details to unlock your account .
+<br/>
+
+Temporary Password : {TEMP-PWD}<br/>
+<br/>
+
+<a href='http://localhost:9898/unlockacc?email={EMAIL}'>
+Click Here To Unlock Your Account</a><br/>
+
+Thanks & Regards,<br/>
+Health and Insurance System Pvt. Ltd.	
+
