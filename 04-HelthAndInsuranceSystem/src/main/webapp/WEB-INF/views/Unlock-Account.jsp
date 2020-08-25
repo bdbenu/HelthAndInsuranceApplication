@@ -6,22 +6,29 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
- <script type="text/javascript">
-function validatePwd(){
-	var newPassword = $(#newPassword).val();
-	var confiPassword = $(#confiPassword).val();
-	if(newPassword!=confiPassword){
-		return true;
-		}
-	$('#errorId').innerHTML = "New Password and confirm-password must be same";
-	return false;
-	
-}
- </script>
+<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script>
+// just for the demos, avoids form submit
+jQuery.validator.setDefaults({
+  debug: true,
+  success: "valid"
+});
+$( "#myform" ).validate({
+  rules: {
+    password: "required",
+    confirmpassword: {
+      equalTo: "#password"
+    }
+  }
+});
+</script>
 </head>
 <body>
 <!--  unlockaccount-->
-<form:form action="unlockaccount" method="POST" modelAttribute="unlockacc" id="loginForm" >
+<form:form action="unlocacc" method="POST" modelAttribute="unlockacc" id="myform">
 <table>
 
 <tr><td> Email</td><td>${email}</td></tr>

@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.helth.insurance.domain.CaseWorkerMaster;
@@ -25,25 +27,35 @@ public class UnlockAccountController {
 
 		return "Unlock-Account";
 	}
-	@PostMapping("/unlockaccount")
-	public String UnlockAccount(@ModelAttribute("caseworker")CaseWorkerMaster caseworkermaster,Model model) {
+	//@PostMapping("/unlockaccount")
+//	@RequestMapping(value = "/unlockaccount",method = RequestMethod.POST)
+//	public String UnlockAccount(@ModelAttribute("caseworker")CaseWorkerMaster caseworkermaster,Model model) {
 	
-		CaseWorkerMaster useaccStatus = caseService.isTempPasswordValid(caseworkermaster.getTempPazzword());
+//		CaseWorkerMaster useaccStatus = caseService.isTempPasswordValid(caseworkermaster.getTempPazzword());
 		
-		if(useaccStatus!=null) {
-			useaccStatus.setAccountStatus("unlock");
-			useaccStatus.setNewPazzword(caseworkermaster.getNewPazzword());
-			boolean isUpdate = caseService.registerCaseWorker(useaccStatus); 
-			if(isUpdate) {
-				model.addAttribute("sucMsg", "sucess");
-			}
-			return"unlockAccountSucess";
-		}else {
-			model.addAttribute("errMsg", "Plz Enter correct Password");
+//		if(useaccStatus!=null) {
+//			useaccStatus.setNewPazzword(caseworkermaster.getNewPazzword());
+//			useaccStatus.setAccountStatus("UNLOCK");
+//			boolean isUpdate = caseService.registerCaseWorker(useaccStatus); 
+//			if(isUpdate) {
+//				model.addAttribute("sucMsg", "sucess");
+//			}
+//			return"unlockAccountSucess";
+//		}else {
+//			model.addAttribute("errMsg", "Plz Enter correct Password");
 			
-			return "Unlock-Account";
-		}
+//			return "Unlock-Account";
+//		}
 		
+//	}
+	@PostMapping("/unlocacc")
+	public String unlockAccount(@ModelAttribute("caseworker")CaseWorkerMaster caseworkermaster,Model model) {
+		boolean updateAccountStatus = caseService.updateAccountStatus(caseworkermaster);
+		if(updateAccountStatus) {
+			
+			return"unlockAccountSucess";
+		}
+		return"Unlock-Account";
 	}
 
 }

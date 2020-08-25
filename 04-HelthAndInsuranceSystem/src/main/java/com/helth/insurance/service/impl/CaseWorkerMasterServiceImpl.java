@@ -82,16 +82,32 @@ public class CaseWorkerMasterServiceImpl implements ICaseWorkerMaster{
 		return isSave!=null;
 	}
 
+//	@Override
+//	public CaseWorkerMaster isTempPasswordValid(String temppwd) {
+//		CaseWorkerMasterEntity entity = caseRepo.findByTempPazzword(temppwd);
+//		CaseWorkerMaster master =null;
+//		if(entity!=null) {
+//			master = new CaseWorkerMaster(); 	
+//			BeanUtils.copyProperties( master,entity);
+//		}
+//		return master;
+//	}
+
 
 
 	@Override
-	public CaseWorkerMaster isTempPasswordValid(String temppwd) {
-		CaseWorkerMaster entity = caseRepo.findByTempPazzword(temppwd);
-		CaseWorkerMaster master =null;
-		if(entity!=null) {
-			master = new CaseWorkerMaster(); 	
-			BeanUtils.copyProperties(entity, master);
-		}
-		return master;
+	public CaseWorkerMaster findByFindByTempPazzwordAndAccountStatus(String tempPazzword, String accounStatus) {
+		return null;
+	}
+
+
+
+	@Override
+	public boolean updateAccountStatus(CaseWorkerMaster caseworkermaster) {
+		CaseWorkerMasterEntity entity = new CaseWorkerMasterEntity();
+		caseworkermaster.setAccountStatus("unlock");
+		BeanUtils.copyProperties(caseworkermaster, entity);
+		CaseWorkerMasterEntity isSave = caseRepo.save(entity);
+		return isSave.getCaseWorkerId()!=null;
 	}
 }
